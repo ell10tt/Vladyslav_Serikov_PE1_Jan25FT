@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Shopping Cart</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/components/header.css">
+
+    <script defer src="js/cart.js"></script>
+</head>
+<body>
+    <header class="header">
+        <a href="./index.html" class="logo__image__link">
+            <img class="logo__image" src="./images/allstore-logo.svg" alt="AllStore Logo">
+        </a>
+
+        <nav class="navigation">
+            <a class="navigation__item" href="/index.html">Home</a>
+            <a class="navigation__item" href="#">About</a>
+            <a class="navigation__item" href="#">Contacts</a>
+
+            <div class="header__icons">
+                <a href="./account/register.html" class="login__icon__link">
+                    <img class="login__icon__img" src="./images/icons/profile-icon.svg" alt="login icon">
+                </a>
+
+                <a class="cart__button" href="./cart.html">
+                    <img src="./images/icons/cart-icon.svg" alt="cart iconn" class="cart__icon">
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Shopping Cart</h1>
+
+        <div id="cart__container">
+            <p>Loading cart...</p>
+        </div>
+
+        <div id="cart__summary">
+            <h2 id="total__price">Total: $0.00</h2>
+            <div>
+                <input type="text" id="promo__code__input" placeholder="Promo code N0R0FF">
+                <button id="apply__promo__btn">Apply</button>
+            </div>
+            <br>
+            <button id="clear__cart__btn">Clear Cart</button>
+            <a href="/checkout.html">Proceed to Checkout</a>
+        </div>
+    </main>
+
+    <footer></footer>
+</body>
+</html>

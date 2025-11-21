@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AllStore: Home</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/components/header.css">
+
+    <script defer src="js/index.js"></script>
+</head>
+<body>
+    <header class="header">
+        <a href="./index.html" class="logo__image__link">
+            <img class="logo__image" src="./images/allstore-logo.svg" alt="AllStore Logo">
+        </a>
+
+        <nav class="navigation">
+            <a class="navigation__item" href="/index.html">Home</a>
+            <a class="navigation__item" href="#">About</a>
+            <a class="navigation__item" href="#">Contacts</a>
+
+            <div class="header__icons">
+                <a href="./account/register.html" class="login__icon__link">
+                    <img class="login__icon__img" src="./images/icons/profile-icon.svg" alt="login icon">
+                </a>
+
+                <a class="cart__button" href="./cart.html">
+                    <img src="./images/icons/cart-icon.svg" alt="cart iconn" class="cart__icon">
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Our Products</h1>
+
+        <section>
+            <h2>Latest Products</h2>
+            <div id="carousel__container">
+                <div id="carousel__slides">
+                </div>
+                <button id="prev__btn">Previous</button>
+                <button id="next__btn">Next</button>
+            </div>
+        </section>
+
+        <section>
+            <h2>All Products</h2>
+            <div id="tags__filter__container"></div>
+
+            <div id="product__grid"></div>
+
+            <button id="load__more__btn">
+                More
+            </button>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer__container">
+            <p>Customer Service</p>
+
+            <ul>
+                <li>Contact Us</li>
+                <li>FAQ</li>
+                <li>Shipping & Returns</li>
+                <li>Payment Options</li>
+                <li>Order Tracking</li>
+            </ul>
+        </div>
+
+        <div class="footer__container">
+            <p>Information</p>
+
+            <ul>
+                <li>Privacy Policy</li>
+                <li>Terms & Conditions</li>
+                <li>Size Guide</li>
+                <li>Careers</li>
+            </ul>
+        </div>
+
+        <div class="footer__container">
+            <div>
+                <p>Contact</p>
+
+                <ul>
+                    <li> Email:  support@allshop.com</li>
+                    <li> Phone:  +1 (555) 123-4567</li>
+                </ul>
+            </div>
+
+            <div>
+                <p>Live Chat:</p>
+
+                <ul>
+                    <li>Available 9AM–6PM (Mon–Fri)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer__container">
+            <div>
+                <p>We are in social media:</p>
+
+                <div>
+                    <img src="" alt="">
+                    <img src="" alt="">
+                    <img src="" alt="">
+                    <img src="" alt="">
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
