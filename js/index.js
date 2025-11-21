@@ -94,10 +94,10 @@ document.addEventListener('DOMContentLoaded', () => {
             carouselSlidesContainer.innerHTML = '';
             const p = products[currentIndex];
             carouselSlidesContainer.innerHTML = `
-                <div>
-                    <img src="${p.imageUrl}" alt="${p.title}" style="width: 200px;">
-                    <h3>${p.title}</h3>
-                    <a href="product.html?id=${p.id}">View Product</a>
+                <div class="img__carousel__container">
+                    <img class="carousel__img" src="${p.imageUrl}" alt="${p.title}">
+                    <p>${p.title}</p>
+                    <a class="carousel__button" href="product.html?id=${p.id}">View Product</a>
                 </div>
             `;
         }

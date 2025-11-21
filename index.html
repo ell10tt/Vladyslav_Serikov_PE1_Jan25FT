@@ -9,7 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/components/header.css">
-
+    <link rel="stylesheet" href="./css/home.css">
+    
     <script defer src="js/index.js"></script>
 </head>
 <body>
@@ -35,15 +36,28 @@
         </nav>
     </header>
 
-    <main>
-        <h1>Our Products</h1>
+    <main class="main">
 
-        <section>
-            <h2>Latest Products</h2>
+        <section class="discount">
+            <h2 class="heading__h2">
+                Todays sales. We have discounts till 90%!
+            </h2>
+
+            <h3 class="heading__h3">
+                Your discount code: NOR0FF
+            </h3>
+        </section>
+
+        <section class="carousel__section">
+            <h2 class="heading__h2">
+                BESTSELLERS
+            </h2>
+
             <div id="carousel__container">
-                <div id="carousel__slides">
-                </div>
+                <div id="carousel__slides"></div>
+
                 <button id="prev__btn">Previous</button>
+
                 <button id="next__btn">Next</button>
             </div>
         </section>
