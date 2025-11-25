@@ -8,7 +8,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="./css/components/header.css">
+    <link rel="stylesheet" href="./css/checkout.css">
 
     <script defer src="js/checkout.js"></script>
 </head>
@@ -17,66 +20,82 @@
         <a href="./index.html" class="logo__image__link">
             <img class="logo__image" src="./images/allstore-logo.svg" alt="AllStore Logo">
         </a>
-
         <nav class="navigation">
             <a class="navigation__item" href="/index.html">Home</a>
             <a class="navigation__item" href="#">About</a>
             <a class="navigation__item" href="#">Contacts</a>
-
             <div class="header__icons">
-                <a href="./account/register.html" class="login__icon__link">
-                    <img class="login__icon__img" src="./images/icons/profile-icon.svg" alt="login icon">
-                </a>
-
-                <a class="cart__button" href="./cart.html">
-                    <img src="./images/icons/cart-icon.svg" alt="cart iconn" class="cart__icon">
-                </a>
+                <a href="./account/register.html" class="login__icon__link"><img class="login__icon__img" src="./images/icons/profile-icon.svg" alt="login"></a>
+                <a class="cart__button" href="./cart.html"><img src="./images/icons/cart-icon.svg" alt="cart" class="cart__icon"></a>
             </div>
         </nav>
     </header>
 
-    <main>
-        <h1>Checkout</h1>
-
-        <form id="checkout__form">
+    <main class="checkout-page">
+        <form id="checkout__form" class="checkout-layout">
             
-            <fieldset>
-                <legend>Delivery Address</legend>
-                <div>
-                    <label for="full__Name">Full Name:</label>
-                    <input type="text" id="full__Name" name="full__Name" required>
-                </div>
-                <div>
-                    <label for="address">Address:</label>
-                    <input type="text" id="address" name="address" required>
-                </div>
-                <div>
-                    <label for="city">City:</label>
-                    <input type="text" id="city" name="city" required>
-                </div>
-                <div>
-                    <label for="post__code">Postal Code:</label>
-                    <input type="text" id="post__code" name="post__code" required>
-                </div>
-            </fieldset>
+            <div class="checkout-form-content">
+                
+                <section class="form-section">
+                    <h2>Contact information</h2>
+                    <input type="text" name="fullname" placeholder="First and last name" required>
+                    <input type="tel" name="phone" placeholder="Contact phone" required>
+                    <input type="email" name="email" placeholder="E-mail address" required>
+                </section>
 
-            <fieldset>
-                <legend>Payment Method</legend>
-                <div>
-                    <input type="radio" id="credit__card" name="payment__method" value="credit__card" checked>
-                    <label for="credit__card">Credit Card</label>
-                </div>
-                <div>
-                    <input type="radio" id="paypal" name="payment__method" value="paypal">
-                    <label for="paypal">PayPal</label>
-                </div>
-                <div>
-                    <input type="radio" id="bank__transfer" name="payment__method" value="bank__transfer">
-                    <label for="bank__transfer">Bank Transfer</label>
-                </div>
-            </fieldset>
+                <section class="form-section">
+                    <h2>Delivery address</h2>
+                    <input type="text" name="address" placeholder="Street, house, apartment" required>
+                    <input type="text" name="city" placeholder="City / Backyard" required>
+                    <input type="text" name="postal" placeholder="Postal code" required>
+                    <input type="text" name="country" placeholder="Country" required>
+                </section>
 
-            <button type="submit">Place Order</button>
+                <div class="options-grid">
+                    <section class="form-section">
+                        <h2>Delivery</h2>
+                        <div class="radio-group">
+                            <label><input type="radio" name="delivery" value="courier" checked> Courier delivery</label>
+                            <label><input type="radio" name="delivery" value="pickup"> Pickup</label>
+                            <label><input type="radio" name="delivery" value="postal"> Postal delivery</label>
+                        </div>
+                    </section>
+
+                    <section class="form-section">
+                        <h2>Payment method</h2>
+                        <div class="radio-group">
+                            <label><input type="radio" name="payment" value="card" checked> Bank card</label>
+                            <label><input type="radio" name="payment" value="wallet"> Online wallets</label>
+                            <label><input type="radio" name="payment" value="cash"> Payment upon receipt</label>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <div class="checkout-sidebar">
+                <div class="promo-block">
+                    <input type="text" placeholder="Promo codes">
+                    <button type="button" class="add-promo-btn">+ Add</button>
+                </div>
+
+                <div class="order-summary-card">
+                    <div class="summary-row">
+                        <span>Subtotal</span>
+                        <span id="checkout-subtotal">$0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Shipping</span>
+                        <span>Free</span>
+                    </div>
+                    <div class="summary-row total-row">
+                        <span>Total</span>
+                        <span id="checkout-total">$0.00</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="place-order-btn">CHECKOUT</button>
+            </div>
+
         </form>
     </main>
 

@@ -24,11 +24,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 const { name, accessToken } = result.data;
                 localStorage.setItem('accessToken', accessToken);
                 localStorage.setItem('userName', name);
-                window.location.href = '/index.html';
+                
+                messageContainer.style.color = 'green';
+                messageContainer.textContent = 'Login successful! Redirecting...';
+                
+                setTimeout(() => {
+                    window.location.href = '../index.html';
+                }, 1000);
             } else {
-                messageContainer.textContent = `Error: ${result.errors[0].message}`;
+                messageContainer.style.color = 'red';
+                const errorMsg = (result.errors && result.errors[0]) ? result.errors[0].message : 'Login failed';
+                messageContainer.textContent = `Error: ${errorMsg}`;
             }
         } catch (error) {
+            console.error(error);
+            messageContainer.style.color = 'red';
             messageContainer.textContent = 'An unexpected error occurred.';
         }
     });

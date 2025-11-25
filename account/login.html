@@ -4,11 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="../css/components/header.css">
+    <link rel="stylesheet" href="../css/auth.css">
 
     <script defer src="../js/login.js"></script>
 </head>
+
 <body>
     <header class="header">
         <a href="../index.html" class="logo__image__link">
@@ -25,35 +30,36 @@
                     <img class="login__icon__img" src="../images/icons/profile-icon.svg" alt="login icon">
                 </a>
 
-                <a class="cart__button" href="./cart.html">
+                <a class="cart__button" href="../cart.html">
                     <img src="../images/icons/cart-icon.svg" alt="cart iconn" class="cart__icon">
                 </a>
             </div>
         </nav>
     </header>
 
-    <main>
-        <h1>Login to Your Account</h1>
-        
-        <form id="login-form">
-            <div>
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div>
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit">Login</button>
-        </form>
+    <main class="auth-page">
+        <div class="auth-container">
+            <h1>Login to Your Account</h1>
+            
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required placeholder="name@stud.noroff.no">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn-primary">Login</button>
+            </form>
 
-        <div id="message__container"></div>
-        <p>
-            Don't have an account? 
-            <a href="register.html">
-                Register here
-            </a>
-        </p>
+            <div id="message__container"></div>
+            
+            <p class="auth-link">
+                Don't have an account? 
+                <a href="register.html">Register here</a>
+            </p>
+        </div>
     </main>
 
     <footer></footer>

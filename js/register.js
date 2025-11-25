@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     registerForm.addEventListener('submit', async (event) => {
         event.preventDefault();
+        messageContainer.textContent = '';
+
         const { name, email, password } = registerForm.elements;
         const userData = {
             name: name.value,
@@ -22,13 +24,22 @@ document.addEventListener('DOMContentLoaded', () => {
             const result = await response.json();
 
             if (response.ok) {
-                messageContainer.textContent = 'Registration successful! Please log in.';
+                messageContainer.style.color = 'green';
+                messageContainer.textContent = 'Registration successful! Redirecting to login...';
                 registerForm.reset();
+                
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 2000);
             } else {
-                messageContainer.textContent = `Error: ${result.errors[0].message}`;
+                messageContainer.style.color = 'red';
+                const errorMsg = (result.errors && result.errors[0]) ? result.errors[0].message : 'Registration failed';
+                messageContainer.textContent = `Error: ${errorMsg}`;
             }
         } catch (error) {
-            messageContainer.textContent = 'error';
+            console.error(error);
+            messageContainer.style.color = 'red';
+            messageContainer.textContent = 'An unexpected error occurred.';
         }
     });
 });

@@ -50,28 +50,48 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const addToCartButtonHtml = isLoggedIn()
-            ? '<button id="add__to__cart__btn">Add to Cart</button>'
-            : '<p>Please <a href="/account/login.html">log in</a> to purchase this item.</p>';
+            ? `<button id="add__to__cart__btn">BUY</button>`
+            : `<p>Please <a href="/account/login.html">log in</a> to purchase this item.</p>`;
 
         productContainer.innerHTML = `
-            <div>
+            <div class="product-image-container">
                 <img src="${product.image.url}" alt="${product.image.alt}">
             </div>
-            <div>
+
+            <div class="product-info-container">
                 <h1>${product.title}</h1>
-                <p>${product.description}</p>
-                <p><strong>Price:</strong> <span>$${product.price}</span></p>
-                ${product.discountedPrice < product.price ? `<p><strong>Discount Price:</strong> $${product.discountedPrice}</p>` : ''}
-                <p><strong>Rating:</strong> ${product.rating} / 5</p>
-                <div><strong>Tags:</strong> ${tagsHtml}</div>
-                <hr>
-                <div>${reviewsHtml}</div>
-                <hr>
+
+                <div class="product-details-grid">
+                    <strong>Price:</strong>
+                    <span>$${product.price}</span>
+                    
+                    ${product.discountedPrice < product.price ? `<strong>Discount:</strong> <span>$${product.discountedPrice}</span>` : ''}
+
+                    <strong>Rating:</strong>
+                    <span>${product.rating} / 5</span>
+
+                    <strong>Tags:</strong>
+                    <div>${tagsHtml}</div>
+                </div>
+
                 ${addToCartButtonHtml}
-                <button id="share__btn">Share</button>
+                
+                <p class="product-description">
+                    <strong>Description:</strong>
+                    <br>
+                    ${product.description}
+                </p>
+            </div>
+
+            <div class="product-reviews-section">
+                <hr>
+                ${reviewsHtml}
             </div>
         `;
     }
+    
+    function addToCart() {}
+    function shareProduct() {}
 
     productContainer.addEventListener('click', (event) => {
         if (event.target.id === 'add__to__cart__btn') addToCart();

@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/components/header.css">
+    <link rel="stylesheet" href="./css/cart.css">
 
     <script defer src="js/cart.js"></script>
 </head>
@@ -35,24 +36,26 @@
         </nav>
     </header>
 
-    <main>
-        <h1>Shopping Cart</h1>
+<main class="cart-page">
+    <h1 class="cart-page__title">SHOPPING CART</h1>
 
-        <div id="cart__container">
-            <p>Loading cart...</p>
-        </div>
+    <div id="cart__container" class="cart-items-container">
+        <p>Loading cart...</p>
+    </div>
 
-        <div id="cart__summary">
-            <h2 id="total__price">Total: $0.00</h2>
-            <div>
-                <input type="text" id="promo__code__input" placeholder="Promo code N0R0FF">
-                <button id="apply__promo__btn">Apply</button>
-            </div>
-            <br>
-            <button id="clear__cart__btn">Clear Cart</button>
-            <a href="/checkout.html">Proceed to Checkout</a>
+    <div id="cart-actions-container" class="cart-actions">
+        <button id="clear__cart__btn" class="btn btn-secondary">CANCEL</button>
+        <a href="/checkout.html" class="btn btn-primary">PROCEED TO CHECKOUT</a>
+    </div>
+
+    <div id="cart__summary" style="display: none;">
+        <h2 id="total__price">Total: $0.00</h2>
+        <div>
+            <input type="text" id="promo__code__input" placeholder="Promo code N0R0FF">
+            <button id="apply__promo__btn">Apply</button>
         </div>
-    </main>
+    </div>
+</main>
 
     <footer></footer>
 </body>

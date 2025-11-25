@@ -89,18 +89,21 @@ document.addEventListener('DOMContentLoaded', () => {
     function initCarousel(products) {
         let currentIndex = 0;
         const totalSlides = products.length;
+
         function renderCarousel() {
             if (!carouselSlidesContainer) return;
             carouselSlidesContainer.innerHTML = '';
             const p = products[currentIndex];
+
             carouselSlidesContainer.innerHTML = `
-                <div class="img__carousel__container">
-                    <img class="carousel__img" src="${p.imageUrl}" alt="${p.title}">
-                    <p>${p.title}</p>
-                    <a class="carousel__button" href="product.html?id=${p.id}">View Product</a>
+                <div class="carousel-slide-item">
+                    <img class="carousel-slide__image" src="${p.imageUrl}" alt="${p.title}">
+                    <h3 class="carousel-slide__title">${p.title}</h3>
+                    <a class="carousel-slide__link" href="product.html?id=${p.id}">View Product</a>
                 </div>
             `;
         }
+
         if (prevBtn) {
             prevBtn.addEventListener('click', () => {
                 currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
