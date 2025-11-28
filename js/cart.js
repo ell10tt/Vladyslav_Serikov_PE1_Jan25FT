@@ -2,9 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const cartContainer = document.getElementById('cart__container');
     const cartSummaryContainer = document.getElementById('cart__summary');
     const totalPriceElement = document.getElementById('total__price');
-    const promoCodeInput = document.getElementById('promo__code__input');
-    
-    let promoCodeApplied = false;
 
     function displayCart() {
         const cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
@@ -12,20 +9,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (cart.length === 0) {
             cartContainer.innerHTML = '<p style="text-align:center; padding: 20px;">Your cart is empty. <a href="/index.html">Continue shopping</a>.</p>';
-            if(cartSummaryContainer) cartSummaryContainer.style.display = 'none';
+            if (cartSummaryContainer) cartSummaryContainer.style.display = 'none';
             return;
         }
 
-        if(cartSummaryContainer) cartSummaryContainer.style.display = 'block';
+        if (cartSummaryContainer) cartSummaryContainer.style.display = 'block';
 
         cart.forEach(item => {
             const itemElement = document.createElement('div');
             itemElement.className = 'cart-item';
             itemElement.dataset.id = item.id;
-            
+
             let imgSrc = 'https://via.placeholder.com/80';
             let imgAlt = item.title;
-
             if (item.image && item.image.url) {
                 imgSrc = item.image.url;
                 imgAlt = item.image.alt || item.title;
@@ -34,14 +30,23 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             itemElement.innerHTML = `
-                <img src="${imgSrc}" alt="${imgAlt}" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px;">
-                <h3>${item.title}</h3>
-                <p>Price: $${item.price}</p>
-                <div>
-                    Quantity: 
-                    <input type="number" class="item-quantity" value="${item.quantity}" min="1" style="width: 50px; padding: 5px;">
+                <a href="product.html?id=${item.id}" class="cart-item__link">
+                    <img src="${imgSrc}" alt="${imgAlt}" class="cart-item__image">
+                </a>
+                
+                <a href="product.html?id=${item.id}" class="cart-item__title-link">
+                    <h3>${item.title}</h3>
+                </a>
+
+                <p class="cart-item__price">$${item.price}</p>
+                
+                <div class="quantity-selector">
+                    <button class="qty-btn decrease">-</button>
+                    <span class="qty-value">${item.quantity}</span>
+                    <button class="qty-btn increase">+</button>
                 </div>
-                <button class="remove-item-btn" style="padding: 5px 10px; background: #ff6b6b; color: white; border: none; cursor: pointer; border-radius: 4px;">Remove</button>
+                
+                <button class="remove-item-btn">Remove</button>
             `;
             cartContainer.appendChild(itemElement);
         });
@@ -55,13 +60,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         cart.forEach(item => {
             let price = parseFloat(item.price);
-            let discountedPrice = parseFloat(item.discountedPrice);
             
             if (isNaN(price)) price = 0;
-            if (isNaN(discountedPrice)) discountedPrice = price;
 
-            const priceToUse = (promoCodeApplied && discountedPrice < price) ? discountedPrice : price;
-            total += priceToUse * item.quantity;
+            total += price * item.quantity;
         });
 
         if (totalPriceElement) {
@@ -69,14 +71,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function updateItemQuantity(productId, quantity) {
+    function changeQuantity(productId, action) {
         let cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
         const item = cart.find(p => p.id === productId);
+
         if (item) {
-            let newQty = parseInt(quantity, 10);
-            if (isNaN(newQty) || newQty < 1) newQty = 1;
-            item.quantity = newQty;
+            if (action === 'increase') {
+                item.quantity += 1;
+            } else if (action === 'decrease') {
+                item.quantity -= 1;
+            }
+
+            if (item.quantity < 1) {
+                cart = cart.filter(p => p.id !== productId);
+            }
         }
+        
         localStorage.setItem('shoppingCart', JSON.stringify(cart));
         displayCart();
     }
@@ -90,16 +100,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (cartContainer) {
         cartContainer.addEventListener('click', (event) => {
-            if (event.target.classList.contains('remove-item-btn')) {
-                const productId = event.target.closest('.cart-item').dataset.id;
-                removeItem(productId);
-            }
-        });
+            const target = event.target;
+            const item = target.closest('.cart-item');
+            if (!item) return;
+            const id = item.dataset.id;
 
-        cartContainer.addEventListener('change', (event) => {
-            if (event.target.classList.contains('item-quantity')) {
-                const productId = event.target.closest('.cart-item').dataset.id;
-                updateItemQuantity(productId, event.target.value);
+            if (target.classList.contains('remove-item-btn')) {
+                removeItem(id);
+            } else if (target.classList.contains('increase')) {
+                changeQuantity(id, 'increase');
+            } else if (target.classList.contains('decrease')) {
+                changeQuantity(id, 'decrease');
             }
         });
     }
@@ -110,20 +121,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (confirm('Are you sure you want to clear your cart?')) {
                 localStorage.removeItem('shoppingCart');
                 displayCart();
-            }
-        });
-    }
-    
-    const applyPromoBtn = document.getElementById('apply__promo__btn');
-    if (applyPromoBtn) {
-        applyPromoBtn.addEventListener('click', () => {
-            if (promoCodeInput && promoCodeInput.value.trim().toUpperCase() === 'N0R0FF') {
-                promoCodeApplied = true;
-                alert('Promo code applied successfully!');
-                updateTotal();
-                promoCodeInput.disabled = true;
-            } else {
-                alert('Invalid promo code.');
             }
         });
     }

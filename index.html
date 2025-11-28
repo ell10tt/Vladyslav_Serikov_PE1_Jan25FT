@@ -8,9 +8,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="./css/components/header.css">
     <link rel="stylesheet" href="./css/home.css">
-    
+
     <script defer src="js/index.js"></script>
 </head>
 <body>
@@ -37,40 +38,27 @@
     </header>
 
     <main class="main">
-
         <section class="discount">
-            <h2 class="heading__h2">
-                Todays sales. We have discounts till 90%!
-            </h2>
-
-            <h3 class="heading__h3">
-                Your discount code: NOR0FF
-            </h3>
+            <h2 class="discount__title">Todays sales. We have discounts till 90%!</h2>
+            <h3 class="discount__code">Your discount code: NOR0FF</h3>
         </section>
 
-        <section class="carousel__section">
-            <h2 class="heading__h2">
-                BESTSELLERS
-            </h2>
-
-            <div id="carousel__container">
-                <div id="carousel__slides"></div>
-
-                <button id="prev__btn">Previous</button>
-
-                <button id="next__btn">Next</button>
+        <section class="carousel">
+            <div class="carousel__container">
+                <div class="carousel__slides"></div>
+                <button class="carousel__btn carousel__btn--prev">&#10094;</button>
+                <button class="carousel__btn carousel__btn--next">&#10095;</button>
             </div>
         </section>
 
-        <section>
-            <h2>All Products</h2>
-            <div id="tags__filter__container"></div>
+        <section class="products">
+            <h2 class="products__title">All Products</h2>
+            
+            <div class="products__filter"></div>
 
-            <div id="product__grid"></div>
+            <div class="products__grid"></div>
 
-            <button id="load__more__btn">
-                More
-            </button>
+            <button class="products__load-more">More</button>
         </section>
     </main>
 

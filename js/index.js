@@ -1,12 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const apiUrl = 'https://api.noroff.dev/api/v1/online-shop';
+    const apiUrl = 'https://v2.api.noroff.dev/online-shop';
 
-    const carouselSlidesContainer = document.getElementById('carousel__slides');
-    const prevBtn = document.getElementById('prev__btn');
-    const nextBtn = document.getElementById('next__btn');
-    const productGridContainer = document.getElementById('product__grid');
-    const loadMoreBtn = document.getElementById('load__more__btn');
-    const tagsContainer = document.getElementById('tags__filter__container');
+    const carouselSlidesContainer = document.querySelector('.carousel__slides');
+    const prevBtn = document.querySelector('.carousel__btn--prev');
+    const nextBtn = document.querySelector('.carousel__btn--next');
+    const productGridContainer = document.querySelector('.products__grid');
+    const loadMoreBtn = document.querySelector('.products__load-more');
+    const tagsContainer = document.querySelector('.products__filter');
     
     let allProducts = [];
     let currentFilteredProducts = [];
@@ -16,8 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
     async function initializePage() {
         try {
             const response = await fetch(apiUrl);
-            if (!response.ok) throw new Error(`API request failed: ${response.status}`);
-            allProducts = await response.json();
+            if (!response.ok) throw new Error(`API error: ${response.status}`);
+            const json = await response.json();
+            
+            allProducts = json.data; 
             currentFilteredProducts = [...allProducts];
 
             initCarousel(allProducts.slice(0, 3));
@@ -25,12 +27,60 @@ document.addEventListener('DOMContentLoaded', () => {
             renderMoreProducts();
 
         } catch (error) {
-            console.error("Error initializing the page:", error);
-            document.querySelector('main').innerHTML = '<p>Could not load product data.</p>';
+            console.error("Error:", error);
         }
     }
 
+    function initCarousel(products) {
+        if (!carouselSlidesContainer || products.length === 0) return;
+        
+        let currentIndex = 0;
+        const totalSlides = products.length;
+
+        function renderCarousel() {
+            carouselSlidesContainer.innerHTML = '';
+            const p = products[currentIndex];
+
+            let imgSrc = 'https://via.placeholder.com/400';
+            let imgAlt = 'Product';
+            if (p.image && p.image.url) {
+                imgSrc = p.image.url;
+                imgAlt = p.image.alt || p.title;
+            }
+
+            carouselSlidesContainer.innerHTML = `
+                <div class="carousel__slide" style="background-image: url('${imgSrc}');">
+                    <div class="carousel__blur"></div>
+                    <img class="carousel__image" src="${imgSrc}" alt="${imgAlt}">
+                    <h3 class="carousel__title">${p.title}</h3>
+                    <a class="carousel__link" href="product.html?id=${p.id}">View Product</a>
+                </div>
+            `;
+        }
+
+        if (prevBtn) {
+            const newPrevBtn = prevBtn.cloneNode(true);
+            prevBtn.parentNode.replaceChild(newPrevBtn, prevBtn);
+            newPrevBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+                renderCarousel();
+            });
+        }
+
+        if (nextBtn) {
+            const newNextBtn = nextBtn.cloneNode(true);
+            nextBtn.parentNode.replaceChild(newNextBtn, nextBtn);
+            newNextBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % totalSlides;
+                renderCarousel();
+            });
+        }
+        
+        renderCarousel();
+    }
+
     function createTagFilters() {
+        if (!tagsContainer) return;
         const allTags = allProducts.flatMap(product => product.tags);
         const uniqueTags = [...new Set(allTags)];
         tagsContainer.innerHTML = '';
@@ -54,23 +104,27 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             currentFilteredProducts = allProducts.filter(product => product.tags.includes(filterTag));
         }
-        productGridContainer.innerHTML = '';
+        if (productGridContainer) productGridContainer.innerHTML = '';
         productsCurrentlyShown = 0;
-        loadMoreBtn.style.display = 'none';
+        if (loadMoreBtn) loadMoreBtn.style.display = 'none';
         renderMoreProducts();
     }
 
     function renderMoreProducts() {
+        if (!productGridContainer) return;
+
         const productsToRender = currentFilteredProducts.slice(productsCurrentlyShown, productsCurrentlyShown + productsPerPage);
 
         productsToRender.forEach(product => {
             const productCard = document.createElement('div');
+            let imgSrc = product.image ? product.image.url : 'https://via.placeholder.com/300';
+            
             productCard.innerHTML = `
-                <img src="${product.imageUrl}" alt="${product.title}" style="max-width: 100%; height: 200px; object-fit: cover;">
+                <img src="${imgSrc}" alt="${product.title}">
                 <h3>${product.title}</h3>
                 <p>Price: $${product.price}</p>
                 <div>
-                    <a href="product.html?id=${product.id}">More details</a>
+                    <a href="product.html?id=${product.id}">More Details</a>
                     <button class="buy-button" data-id="${product.id}">Buy</button>
                 </div>
             `;
@@ -79,44 +133,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         productsCurrentlyShown += productsToRender.length;
 
-        if (productsCurrentlyShown < currentFilteredProducts.length) {
-            loadMoreBtn.style.display = 'block';
-        } else {
-            loadMoreBtn.style.display = 'none';
+        if (loadMoreBtn) {
+            if (productsCurrentlyShown < currentFilteredProducts.length) {
+                loadMoreBtn.style.display = 'block';
+            } else {
+                loadMoreBtn.style.display = 'none';
+            }
         }
-    }
-
-    function initCarousel(products) {
-        let currentIndex = 0;
-        const totalSlides = products.length;
-
-        function renderCarousel() {
-            if (!carouselSlidesContainer) return;
-            carouselSlidesContainer.innerHTML = '';
-            const p = products[currentIndex];
-
-            carouselSlidesContainer.innerHTML = `
-                <div class="carousel-slide-item">
-                    <img class="carousel-slide__image" src="${p.imageUrl}" alt="${p.title}">
-                    <h3 class="carousel-slide__title">${p.title}</h3>
-                    <a class="carousel-slide__link" href="product.html?id=${p.id}">View Product</a>
-                </div>
-            `;
-        }
-
-        if (prevBtn) {
-            prevBtn.addEventListener('click', () => {
-                currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-                renderCarousel();
-            });
-        }
-        if (nextBtn) {
-            nextBtn.addEventListener('click', () => {
-                currentIndex = (currentIndex + 1) % totalSlides;
-                renderCarousel();
-            });
-        }
-        renderCarousel();
     }
 
     function addToCart(productId) {
@@ -133,15 +156,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         localStorage.setItem('shoppingCart', JSON.stringify(cart));
-        alert(`${productToAdd.title} added to your cart!`);
+        alert(`${productToAdd.title} added to cart!`);
     }
 
-    loadMoreBtn.addEventListener('click', renderMoreProducts);
-    productGridContainer.addEventListener('click', (event) => {
-        if (event.target.classList.contains('buy-button')) {
-            addToCart(event.target.dataset.id);
-        }
-    });
+    if (loadMoreBtn) loadMoreBtn.addEventListener('click', renderMoreProducts);
+    if (productGridContainer) {
+        productGridContainer.addEventListener('click', (event) => {
+            if (event.target.classList.contains('buy-button')) {
+                addToCart(event.target.dataset.id);
+            }
+        });
+    }
 
     initializePage();
 });
