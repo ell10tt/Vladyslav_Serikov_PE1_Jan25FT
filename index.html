@@ -8,11 +8,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="./images/allstore-logo.svg" type="image/x-icon">
     
     <link rel="stylesheet" href="./css/components/header.css">
     <link rel="stylesheet" href="./css/home.css">
 
     <script defer src="js/index.js"></script>
+    <script defer src="js/header.js"></script>
 </head>
 <body>
     <header class="header">
@@ -33,16 +35,39 @@
                 <a class="cart__button" href="./cart.html">
                     <img src="./images/icons/cart-icon.svg" alt="cart iconn" class="cart__icon">
                 </a>
+
+                <button id="burger__btn" class="burger__btn">
+                    <img src="./images/icons/burger-icon.svg" alt="Burger button">
+                </button>
             </div>
         </nav>
     </header>
 
-    <main class="main">
-        <section class="discount">
+    <aside id="mobile__menu" class="mobile__menu">
+        <div class="mobile__menu__header">
+            <span class="mobile__menu__title">Menu</span>
+            <button id="close__menu__btn" class="close__menu__btn">
+                <img src="./images/icons/hide-menu.svg" class="close__menu__icon" alt="hide burger menu">
+            </button>
+        </div>
+        
+        <nav class="mobile__navigation">
+            <a href="/index.html">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contacts</a>
+            <hr>
+            <a href="/account/login.html">Login / Register</a>
+        </nav>
+    </aside>
+
+    <div id="menu__overlay" class="menu__overlay"></div>
+
+    <section class="discount">
             <h2 class="discount__title">Todays sales. We have discounts till 90%!</h2>
             <h3 class="discount__code">Your discount code: NOR0FF</h3>
-        </section>
+    </section>
 
+    <main class="main">
         <section class="carousel">
             <div class="carousel__container">
                 <div class="carousel__slides"></div>

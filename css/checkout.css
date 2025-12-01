@@ -1,8 +1,9 @@
+@import url(./variables.css);
 .checkout-page {
   max-width: 1200px;
   margin: 40px auto;
   padding: 0 20px;
-  font-family: "Rubik", sans-serif;
+  font-family: var(--font-main);
 }
 
 .checkout-layout {
@@ -16,8 +17,8 @@
   margin-bottom: 40px;
 }
 .checkout-form-content .form-section h2 {
-  font-family: "Playfair Display", serif;
-  color: #9B98D5;
+  font-family: var(--font-serif);
+  color: var(--color-logo);
   font-size: 2rem;
   margin-bottom: 20px;
   font-weight: 400;
@@ -28,26 +29,26 @@
   width: 100%;
   padding: 15px 25px;
   margin-bottom: 15px;
-  border: 1px solid #E0E0E0;
+  border: 1px solid var(--color-border);
   border-radius: 30px;
-  font-family: "Rubik", sans-serif;
+  font-family: var(--font-main);
   font-size: 1rem;
-  color: #5C5C5C;
+  color: var(--color-text);
   outline: none;
   box-sizing: border-box;
 }
 .checkout-form-content .form-section input[type=text]::-moz-placeholder, .checkout-form-content .form-section input[type=tel]::-moz-placeholder, .checkout-form-content .form-section input[type=email]::-moz-placeholder {
-  color: rgb(168.5, 168.5, 168.5);
+  color: #999;
 }
 .checkout-form-content .form-section input[type=text]::placeholder,
 .checkout-form-content .form-section input[type=tel]::placeholder,
 .checkout-form-content .form-section input[type=email]::placeholder {
-  color: rgb(168.5, 168.5, 168.5);
+  color: #999;
 }
 .checkout-form-content .form-section input[type=text]:focus,
 .checkout-form-content .form-section input[type=tel]:focus,
 .checkout-form-content .form-section input[type=email]:focus {
-  border-color: #9B98D5;
+  border-color: var(--color-logo);
 }
 .checkout-form-content .options-grid {
   display: grid;
@@ -63,7 +64,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  color: #5C5C5C;
+  color: var(--color-text);
   cursor: pointer;
   font-size: 1rem;
 }
@@ -75,7 +76,7 @@
 .checkout-sidebar .promo-block {
   display: flex;
   align-items: center;
-  border: 1px solid #E0E0E0;
+  border: 1px solid var(--color-border);
   border-radius: 4px;
   padding: 5px 15px;
   margin-bottom: 30px;
@@ -85,25 +86,25 @@
   flex-grow: 1;
   padding: 10px;
   outline: none;
-  font-family: "Rubik", sans-serif;
+  font-family: var(--font-main);
 }
 .checkout-sidebar .promo-block .add-promo-btn {
   background: none;
   border: none;
-  color: #8EB897;
+  color: var(--color-primary);
   font-weight: 500;
   cursor: pointer;
 }
 .checkout-sidebar .order-summary-card {
-  border: 1px solid #E0E0E0;
+  border: 1px solid var(--color-border);
   padding: 30px;
-  background-color: white;
+  background-color: var(--color-bg);
 }
 .checkout-sidebar .order-summary-card .summary-row {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
-  color: #5C5C5C;
+  color: var(--color-text);
   font-size: 1.1rem;
 }
 .checkout-sidebar .order-summary-card .summary-row.total-row {
@@ -111,19 +112,19 @@
   font-size: 1.5rem;
 }
 .checkout-sidebar .order-summary-card .summary-row.total-row span:first-child {
-  font-family: "Playfair Display", serif;
+  font-family: var(--font-serif);
   color: #333;
 }
 .checkout-sidebar .order-summary-card .summary-row.total-row span:last-child {
-  color: #8EB897;
+  color: var(--color-primary);
   font-weight: 500;
 }
 .checkout-sidebar .place-order-btn {
   width: 100%;
   margin-top: 20px;
   padding: 15px;
-  background-color: #8EB897;
-  color: white;
+  background-color: var(--color-primary);
+  color: var(--color-white);
   border: none;
   font-size: 1.1rem;
   font-weight: 500;
@@ -131,7 +132,7 @@
   transition: background-color 0.2s;
 }
 .checkout-sidebar .place-order-btn:hover {
-  background-color: rgb(110.6793478261, 164.3206521739, 122.1739130435);
+  filter: brightness(0.9);
 }
 
 @media (max-width: 900px) {

@@ -1,15 +1,16 @@
+@import url(./variables.css);
 .auth-page {
-  font-family: "Rubik", sans-serif;
+  font-family: var(--font-main);
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 80vh;
-  background-color: #F9F9F9;
+  background-color: var(--color-bg-secondary);
   padding: 20px;
 }
 
 .auth-container {
-  background-color: white;
+  background-color: var(--color-bg);
   padding: 40px;
   border-radius: 8px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
@@ -19,7 +20,7 @@
 }
 .auth-container h1 {
   font-size: 2rem;
-  color: #333333;
+  color: var(--color-text);
   margin-bottom: 30px;
   font-weight: 500;
 }
@@ -31,29 +32,29 @@
 .form-group label {
   display: block;
   margin-bottom: 8px;
-  color: rgb(76.5, 76.5, 76.5);
+  color: #555;
   font-size: 0.9rem;
 }
 .form-group input {
   width: 100%;
   padding: 12px;
-  border: 1px solid #EAEAEA;
+  border: 1px solid var(--color-border);
   border-radius: 4px;
   font-size: 1rem;
-  font-family: "Rubik", sans-serif;
+  font-family: var(--font-main);
   box-sizing: border-box;
   transition: border-color 0.2s;
 }
 .form-group input:focus {
   outline: none;
-  border-color: #8EB897;
+  border-color: var(--color-primary);
 }
 
 .btn-primary {
   width: 100%;
   padding: 12px;
-  background-color: #8EB897;
-  color: white;
+  background-color: var(--color-primary);
+  color: var(--color-white);
   border: none;
   border-radius: 4px;
   font-size: 1rem;
@@ -63,7 +64,7 @@
   margin-top: 10px;
 }
 .btn-primary:hover {
-  background-color: rgb(110.6793478261, 164.3206521739, 122.1739130435);
+  filter: brightness(0.9);
 }
 
 #message__container {
@@ -76,10 +77,10 @@
 .auth-link {
   margin-top: 25px;
   font-size: 0.9rem;
-  color: #666666;
+  color: #888;
 }
 .auth-link a {
-  color: #8EB897;
+  color: var(--color-primary);
   text-decoration: none;
   font-weight: 500;
 }
