@@ -4,31 +4,23 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentProduct = null;
 
     function isLoggedIn() {
-        const token = localStorage.getItem('accessToken');
-        return !!token;
+        return !!localStorage.getItem('accessToken');
     }
 
     function getProductIdFromUrl() {
-        const params = new URLSearchParams(window.location.search);
-        return params.get('id');
+        return new URLSearchParams(window.location.search).get('id');
     }
 
     async function fetchProduct() {
-        const productId = getProductIdFromUrl();
-        if (!productId) {
-            productContainer.innerHTML = '<p>Error: Product ID not found.</p>';
-            return;
-        }
-
         try {
-            const response = await fetch(apiUrlBase + productId);
-            if (!response.ok) throw new Error(`Product not found.`);
-            const result = await response.json();
-            currentProduct = result.data;
+            const id = getProductIdFromUrl();
+            if (!id) throw new Error('No ID');
+            const response = await fetch(apiUrlBase + id);
+            const json = await response.json();
+            currentProduct = json.data;
             renderProduct(currentProduct);
         } catch (error) {
-            console.error("Error fetching product:", error);
-            productContainer.innerHTML = '<p>Sorry, we could not find the product.</p>';
+            console.error(error);
         }
     }
 
@@ -37,21 +29,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const tagsHtml = product.tags.map(tag => `<span class="tag">#${tag}</span>`).join(' ');
         
-        let reviewsHtml = '<h3>Reviews</h3>';
+        let reviewsHtml = '<p>No reviews yet.</p>';
         if (product.reviews && product.reviews.length > 0) {
-            reviewsHtml += product.reviews.map(review => `
+            reviewsHtml = '<h3>Reviews</h3>' + product.reviews.map(review => `
                 <div class="review">
                     <strong>${review.username}</strong> (Rating: ${review.rating}/5)
                     <p>${review.description}</p>
                 </div>
             `).join('');
-        } else {
-            reviewsHtml += '<p>No reviews yet.</p>';
         }
 
         const addToCartButtonHtml = isLoggedIn()
             ? `<button id="add__to__cart__btn">BUY</button>`
-            : `<p>Please <a href="/account/login.html">log in</a> to purchase this item.</p>`;
+            : `<p class="login-prompt">Please <a href="/account/login.html">log in</a> to purchase.</p>`;
 
         productContainer.innerHTML = `
             <div class="product-image-container">
@@ -74,13 +64,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div>${tagsHtml}</div>
                 </div>
 
-                ${addToCartButtonHtml}
+                <div class="product-buttons">
+                    ${addToCartButtonHtml}
+                    <button id="share__btn" class="share__btn">Share Link</button>
+                </div>
                 
-                <p class="product-description">
+                <div class="product-description">
                     <strong>Description:</strong>
                     <br>
                     ${product.description}
-                </p>
+                </div>
             </div>
 
             <div class="product-reviews-section">
@@ -90,8 +83,25 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
     
-    function addToCart() {}
-    function shareProduct() {}
+    function addToCart() {
+        if (!currentProduct) return;
+        let cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
+        const existingProduct = cart.find(item => item.id === currentProduct.id);
+
+        if (existingProduct) {
+            existingProduct.quantity += 1;
+        } else {
+            cart.push({ ...currentProduct, quantity: 1 });
+        }
+
+        localStorage.setItem('shoppingCart', JSON.stringify(cart));
+        alert(`${currentProduct.title} added to cart!`);
+    }
+    
+    function shareProduct() {
+        navigator.clipboard.writeText(window.location.href);
+        alert('Link copied to clipboard!');
+    }
 
     productContainer.addEventListener('click', (event) => {
         if (event.target.id === 'add__to__cart__btn') addToCart();

@@ -17,7 +17,7 @@
   margin-bottom: 40px;
 }
 .checkout-form-content .form-section h2 {
-  font-family: var(--font-serif);
+  font-family: var(--font-main);
   color: var(--color-logo);
   font-size: 2rem;
   margin-bottom: 20px;
@@ -112,7 +112,7 @@
   font-size: 1.5rem;
 }
 .checkout-sidebar .order-summary-card .summary-row.total-row span:first-child {
-  font-family: var(--font-serif);
+  font-family: var(--font-main);
   color: #333;
 }
 .checkout-sidebar .order-summary-card .summary-row.total-row span:last-child {
@@ -143,4 +143,4 @@
   .checkout-form-content .options-grid {
     grid-template-columns: 1fr;
   }
-}
+}/*# sourceMappingURL=checkout.css.map */

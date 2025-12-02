@@ -2,13 +2,12 @@
 .main {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
   font-family: var(--font-main);
 }
 .main .carousel {
   display: flex;
   justify-content: center;
-  margin-bottom: 60px;
+  margin-bottom: 32px;
 }
 .main .carousel__container {
   width: 400px;
@@ -16,8 +15,6 @@
   position: relative;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-  background-color: var(--color-bg);
 }
 .main .carousel__slides {
   width: 100%;
@@ -33,17 +30,6 @@
   background-size: cover;
   background-position: center;
 }
-.main .carousel__slide::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 50%;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
-  z-index: 3;
-  pointer-events: none;
-}
 .main .carousel__blur {
   position: absolute;
   top: 0;
@@ -52,7 +38,6 @@
   height: 100%;
   -webkit-backdrop-filter: blur(30px);
           backdrop-filter: blur(30px);
-  background-color: rgba(255, 255, 255, 0.4);
   z-index: 1;
 }
 .main .carousel__image {
@@ -62,15 +47,14 @@
      object-fit: contain;
   position: relative;
   z-index: 2;
-  filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2));
 }
 .main .carousel__title {
   position: absolute;
-  bottom: 75px;
+  bottom: 64px;
   left: 0;
   width: 100%;
   text-align: center;
-  font-size: 1.8rem;
+  font-size: 32px;
   font-weight: 600;
   color: var(--color-white);
   margin: 0;
@@ -84,7 +68,7 @@
 }
 .main .carousel__link {
   position: absolute;
-  bottom: 25px;
+  bottom: 16px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 4;
@@ -94,8 +78,9 @@
   border-radius: 30px;
   text-decoration: none;
   font-weight: 500;
+  font-size: 16px;
   transition: transform 0.2s;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3019607843);
 }
 .main .carousel__link:hover {
   transform: translateX(-50%) scale(1.05);
@@ -105,10 +90,10 @@
   top: 50%;
   transform: translateY(-50%);
   z-index: 10;
-  background-color: rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  background-color: rgba(0, 0, 0, 0.3019607843);
+  border: 0;
   color: white;
-  font-size: 1.2rem;
+  font-size: 24px;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -117,6 +102,9 @@
   align-items: center;
   justify-content: center;
   transition: background-color 0.2s;
+}
+.main .carousel__btn img {
+  height: 24px;
 }
 .main .carousel__btn:hover {
   background-color: var(--color-primary);
@@ -130,9 +118,9 @@
 }
 .main .products__title {
   text-align: center;
-  font-size: 2.2rem;
+  font-size: 32px;
   font-weight: 500;
-  margin-bottom: 40px;
+  margin-bottom: 32px;
   color: var(--color-text);
 }
 .main .products__filter {
@@ -149,6 +137,9 @@
   border-radius: 20px;
   cursor: pointer;
   transition: all 0.2s ease;
+  font-size: 14px;
+  font-family: var(--font-main);
+  color: var(--color-text);
 }
 .main .products__filter button:hover {
   background-color: var(--color-primary);
@@ -160,7 +151,7 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 30px;
 }
-.main .products__grid > div {
+.main .products__grid div {
   border: 1px solid var(--color-border);
   border-radius: 4px;
   background: var(--color-bg);
@@ -169,55 +160,55 @@
   display: flex;
   flex-direction: column;
 }
-.main .products__grid > div img {
+.main .products__grid div img {
   width: 100%;
   height: 280px;
   -o-object-fit: cover;
      object-fit: cover;
   margin-bottom: 20px;
 }
-.main .products__grid > div h3 {
-  font-size: 1.2rem;
+.main .products__grid div h3 {
+  font-size: 20px;
   font-weight: 500;
   color: var(--color-text);
   margin-bottom: 10px;
 }
-.main .products__grid > div p {
-  font-size: 1rem;
+.main .products__grid div p {
+  font-size: 16px;
   color: #999;
   margin-bottom: 25px;
   flex-grow: 1;
 }
-.main .products__grid > div div {
+.main .products__grid div div {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-.main .products__grid > div a, .main .products__grid > div button {
+.main .products__grid div a, .main .products__grid div button {
   padding: 12px 20px;
   border-radius: 4px;
   text-decoration: none;
   font-family: var(--font-main);
-  font-size: 0.9rem;
+  font-size: 14px;
   font-weight: 500;
   display: block;
   transition: all 0.2s;
 }
-.main .products__grid > div a {
+.main .products__grid div a {
   border: 1px solid var(--color-border);
   background-color: var(--color-bg);
   color: var(--color-text);
 }
-.main .products__grid > div a:hover {
+.main .products__grid div a:hover {
   filter: brightness(0.97);
 }
-.main .products__grid > div .buy-button {
+.main .products__grid div .buy-button {
   border: 1px solid var(--color-primary);
   background-color: var(--color-primary);
   color: var(--color-white);
   cursor: pointer;
 }
-.main .products__grid > div .buy-button:hover {
+.main .products__grid div .buy-button:hover {
   filter: brightness(0.9);
 }
 .main .products__load-more {
@@ -228,8 +219,9 @@
   color: var(--color-white);
   border: none;
   border-radius: 4px;
-  font-size: 1rem;
+  font-size: 16px;
   font-weight: 500;
+  font-family: var(--font-main);
   cursor: pointer;
   transition: background-color 0.2s;
 }
@@ -250,24 +242,32 @@
   align-items: center;
   justify-content: center;
   background-color: var(--color-accent);
-  margin-bottom: 40px;
+  margin-bottom: 32px;
 }
 .discount__title {
   color: #F5F5F5;
   font-size: 36px;
   font-weight: 700;
   margin: 0;
+  font-family: var(--font-main);
 }
 .discount__code {
   color: #F5F5F5;
   font-size: 32px;
   font-weight: 400;
   margin: 0;
+  font-family: var(--font-main);
 }
 
 @media (max-width: 1024px) {
   .main .products__grid {
     grid-template-columns: repeat(3, 1fr);
+  }
+  .discount__title {
+    font-size: 30px;
+  }
+  .discount__code {
+    font-size: 26px;
   }
 }
 @media (max-width: 768px) {
@@ -275,7 +275,7 @@
     grid-template-columns: repeat(2, 1fr);
   }
   .discount__title {
-    font-size: 26px;
+    font-size: 22px;
   }
   .discount__code {
     font-size: 20px;
@@ -285,16 +285,10 @@
   .main .products__grid {
     grid-template-columns: 1fr;
   }
-  .main .discount__title {
-    font-size: 1.5rem;
-  }
-  .main .discount__code {
-    font-size: 1.2rem;
-  }
   .discount__title {
     font-size: 20px;
   }
   .discount__code {
-    font-size: 16px;
+    font-size: 14px;
   }
-}
+}/*# sourceMappingURL=home.css.map */
