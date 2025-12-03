@@ -9,25 +9,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (cart.length === 0) {
             cartContainer.innerHTML = '<p style="text-align:center; padding: 20px;">Your cart is empty. <a href="/index.html">Continue shopping</a>.</p>';
-            if (cartSummaryContainer) cartSummaryContainer.style.display = 'none';
+            cartSummaryContainer.style.display = 'none';
             return;
         }
 
-        if (cartSummaryContainer) cartSummaryContainer.style.display = 'block';
+        cartSummaryContainer.style.display = 'block';
 
         cart.forEach(item => {
             const itemElement = document.createElement('div');
             itemElement.className = 'cart-item';
             itemElement.dataset.id = item.id;
 
-            let imgSrc = 'https://via.placeholder.com/80';
-            let imgAlt = item.title;
-            if (item.image && item.image.url) {
-                imgSrc = item.image.url;
-                imgAlt = item.image.alt || item.title;
-            } else if (item.imageUrl) {
-                imgSrc = item.imageUrl;
-            }
+            let imgSrc = item.image?.url || item.imageUrl || 'https://via.placeholder.com/80';
+            let imgAlt = item.image?.alt || item.title;
 
             itemElement.innerHTML = `
                 <a href="product.html?id=${item.id}" class="cart-item__link">
@@ -60,21 +54,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         cart.forEach(item => {
             let price = parseFloat(item.price);
-            
             if (isNaN(price)) price = 0;
-
             total += price * item.quantity;
         });
 
-        if (totalPriceElement) {
-            totalPriceElement.textContent = `Total: $${total.toFixed(2)}`;
-        }
+        totalPriceElement.textContent = `Total: $${total.toFixed(2)}`;
     }
 
     function changeQuantity(productId, action) {
         let cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
         const item = cart.find(p => p.id === productId);
-
+        
         if (item) {
             if (action === 'increase') {
                 item.quantity += 1;
@@ -98,32 +88,27 @@ document.addEventListener('DOMContentLoaded', () => {
         displayCart();
     }
 
-    if (cartContainer) {
-        cartContainer.addEventListener('click', (event) => {
-            const target = event.target;
-            const item = target.closest('.cart-item');
-            if (!item) return;
-            const id = item.dataset.id;
+    cartContainer.addEventListener('click', (event) => {
+        const target = event.target;
+        const item = target.closest('.cart-item');
+        if (!item) return;
+        const id = item.dataset.id;
 
-            if (target.classList.contains('remove-item-btn')) {
-                removeItem(id);
-            } else if (target.classList.contains('increase')) {
-                changeQuantity(id, 'increase');
-            } else if (target.classList.contains('decrease')) {
-                changeQuantity(id, 'decrease');
-            }
-        });
-    }
+        if (target.classList.contains('remove-item-btn')) {
+            removeItem(id);
+        } else if (target.classList.contains('increase')) {
+            changeQuantity(id, 'increase');
+        } else if (target.classList.contains('decrease')) {
+            changeQuantity(id, 'decrease');
+        }
+    });
 
-    const clearBtn = document.getElementById('clear__cart__btn');
-    if (clearBtn) {
-        clearBtn.addEventListener('click', () => {
-            if (confirm('Are you sure you want to clear your cart?')) {
-                localStorage.removeItem('shoppingCart');
-                displayCart();
-            }
-        });
-    }
+    document.getElementById('clear__cart__btn').addEventListener('click', () => {
+        if (confirm('Clear entire cart?')) {
+            localStorage.removeItem('shoppingCart');
+            displayCart();
+        }
+    });
 
     displayCart();
 });
