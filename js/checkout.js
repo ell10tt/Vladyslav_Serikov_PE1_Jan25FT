@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     checkoutForm.addEventListener('submit', (event) => {
         event.preventDefault();
         localStorage.removeItem('shoppingCart');
-        window.location.href = '/success.html';
+        window.location.href = './success.html';
     });
 
     calculateTotal();
