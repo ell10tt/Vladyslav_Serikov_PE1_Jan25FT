@@ -31,18 +31,18 @@
 }
 .success__title {
   color: var(--color-text);
-  font-size: 2rem;
+  font-size: 32px;
   margin-bottom: 20px;
   font-weight: 500;
 }
 .success__text {
   color: var(--color-text);
-  font-size: 1.1rem;
+  font-size: 18px;
   margin-bottom: 10px;
 }
 .success__subtext {
   color: var(--color-text-light);
-  font-size: 0.95rem;
+  font-size: 15px;
   margin-bottom: 40px;
 }
 .success__btn {
@@ -64,6 +64,6 @@
     padding: 40px 20px;
   }
   .success__title {
-    font-size: 1.5rem;
+    font-size: 24px;
   }
 }/*# sourceMappingURL=success.css.map */

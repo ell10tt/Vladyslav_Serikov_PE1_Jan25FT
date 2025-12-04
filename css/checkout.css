@@ -17,9 +17,9 @@
   margin-bottom: 40px;
 }
 .checkout-form-content .form-section h2 {
-  font-family: var(--font-main);
+  font-family: var(--font-serif);
   color: var(--color-logo);
-  font-size: 2rem;
+  font-size: 32px;
   margin-bottom: 20px;
   font-weight: 400;
 }
@@ -32,7 +32,7 @@
   border: 1px solid var(--color-border);
   border-radius: 30px;
   font-family: var(--font-main);
-  font-size: 1rem;
+  font-size: 16px;
   color: var(--color-text);
   outline: none;
   box-sizing: border-box;
@@ -66,7 +66,7 @@
   gap: 10px;
   color: var(--color-text);
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 16px;
 }
 .checkout-form-content .options-grid .radio-group label input[type=radio] {
   accent-color: black;
@@ -105,15 +105,15 @@
   justify-content: space-between;
   margin-bottom: 20px;
   color: var(--color-text);
-  font-size: 1.1rem;
+  font-size: 18px;
 }
 .checkout-sidebar .order-summary-card .summary-row.total-row {
   margin-top: 40px;
-  font-size: 1.5rem;
+  font-size: 24px;
 }
 .checkout-sidebar .order-summary-card .summary-row.total-row span:first-child {
-  font-family: var(--font-main);
-  color: #333;
+  font-family: var(--font-serif);
+  color: var(--color-text);
 }
 .checkout-sidebar .order-summary-card .summary-row.total-row span:last-child {
   color: var(--color-primary);
@@ -126,7 +126,7 @@
   background-color: var(--color-primary);
   color: var(--color-white);
   border: none;
-  font-size: 1.1rem;
+  font-size: 18px;
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.2s;

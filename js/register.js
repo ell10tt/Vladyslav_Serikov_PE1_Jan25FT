@@ -1,12 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     const registerForm = document.getElementById('register__form');
     const messageContainer = document.getElementById('message__container');
-
     const apiUrl = 'https://v2.api.noroff.dev/auth/register';
 
     registerForm.addEventListener('submit', async (event) => {
         event.preventDefault();
-        messageContainer.textContent = '';
 
         const { name, email, password } = registerForm.elements;
         const userData = {
@@ -33,11 +31,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 2000);
             } else {
                 messageContainer.style.color = 'red';
-                const errorMsg = (result.errors && result.errors[0]) ? result.errors[0].message : 'Registration failed';
+                const errorMsg = result.errors?.[0]?.message || 'Registration failed';
                 messageContainer.textContent = `Error: ${errorMsg}`;
             }
         } catch (error) {
-            console.error(error);
             messageContainer.style.color = 'red';
             messageContainer.textContent = 'An unexpected error occurred.';
         }

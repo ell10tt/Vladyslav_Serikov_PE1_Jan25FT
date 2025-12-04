@@ -20,26 +20,19 @@ document.addEventListener('DOMContentLoaded', () => {
             itemElement.className = 'cart-item';
             itemElement.dataset.id = item.id;
 
-            let imgSrc = item.image?.url || item.imageUrl || 'https://via.placeholder.com/80';
-            let imgAlt = item.image?.alt || item.title;
-
             itemElement.innerHTML = `
                 <a href="product.html?id=${item.id}" class="cart-item__link">
-                    <img src="${imgSrc}" alt="${imgAlt}" class="cart-item__image">
+                    <img src="${item.image.url}" alt="${item.image.alt || item.title}" class="cart-item__image">
                 </a>
-                
                 <a href="product.html?id=${item.id}" class="cart-item__title-link">
                     <h3>${item.title}</h3>
                 </a>
-
                 <p class="cart-item__price">$${item.price}</p>
-                
                 <div class="quantity-selector">
                     <button class="qty-btn decrease">-</button>
                     <span class="qty-value">${item.quantity}</span>
                     <button class="qty-btn increase">+</button>
                 </div>
-                
                 <button class="remove-item-btn">Remove</button>
             `;
             cartContainer.appendChild(itemElement);
@@ -49,31 +42,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateTotal() {
-        let cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
-        let total = 0;
-
-        cart.forEach(item => {
-            let price = parseFloat(item.price);
-            if (isNaN(price)) price = 0;
-            total += price * item.quantity;
-        });
-
+        const cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
+        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
         totalPriceElement.textContent = `Total: $${total.toFixed(2)}`;
     }
 
     function changeQuantity(productId, action) {
         let cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
-        const item = cart.find(p => p.id === productId);
-        
-        if (item) {
+        const itemIndex = cart.findIndex(p => p.id === productId);
+
+        if (itemIndex > -1) {
             if (action === 'increase') {
-                item.quantity += 1;
+                cart[itemIndex].quantity += 1;
             } else if (action === 'decrease') {
-                item.quantity -= 1;
+                cart[itemIndex].quantity -= 1;
             }
 
-            if (item.quantity < 1) {
-                cart = cart.filter(p => p.id !== productId);
+            if (cart[itemIndex].quantity < 1) {
+                cart.splice(itemIndex, 1);
             }
         }
         

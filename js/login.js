@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('login-form');
     const messageContainer = document.getElementById('message__container');
-
     const apiUrl = 'https://v2.api.noroff.dev/auth/login';
 
     loginForm.addEventListener('submit', async (event) => {
         event.preventDefault();
+        
         const { email, password } = loginForm.elements;
         const loginData = {
             email: email.value,
@@ -33,11 +33,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 1000);
             } else {
                 messageContainer.style.color = 'red';
-                const errorMsg = (result.errors && result.errors[0]) ? result.errors[0].message : 'Login failed';
+                const errorMsg = result.errors?.[0]?.message || 'Login failed';
                 messageContainer.textContent = `Error: ${errorMsg}`;
             }
         } catch (error) {
-            console.error(error);
             messageContainer.style.color = 'red';
             messageContainer.textContent = 'An unexpected error occurred.';
         }

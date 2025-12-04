@@ -8,20 +8,18 @@ document.addEventListener('DOMContentLoaded', () => {
         let total = 0;
 
         cart.forEach(item => {
-
-            let price = parseFloat(item.discountedPrice || item.price);
+            let price = parseFloat(item.price);
+            if (isNaN(price)) price = 0;
             total += price * item.quantity;
         });
 
-        if (subtotalEl) subtotalEl.textContent = `$${total.toFixed(2)}`;
-        if (totalEl) totalEl.textContent = `$${total.toFixed(2)}`;
+        subtotalEl.textContent = `$${total.toFixed(2)}`;
+        totalEl.textContent = `$${total.toFixed(2)}`;
     }
 
     checkoutForm.addEventListener('submit', (event) => {
         event.preventDefault();
-
         localStorage.removeItem('shoppingCart');
-
         window.location.href = '/success.html';
     });
 
