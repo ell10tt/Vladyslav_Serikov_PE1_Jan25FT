@@ -1,4 +1,32 @@
 @import url(../variables.css);
+.footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 32px;
+  margin-bottom: 32px;
+  font-family: var(--font-main);
+  flex-wrap: wrap;
+  cursor: pointer;
+  border-top: 6px solid;
+  border-color: var(--color-accent);
+}
 .footer .footer__container {
   display: flex;
+  flex-direction: column;
+  width: 250px;
+}
+.footer .footer__container P {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  font-size: 20px;
+  cursor: default;
+}
+.footer .footer__container ul li {
+  margin-bottom: 5px;
+}
+.footer img {
+  width: 24px;
+  height: 24px;
+  margin-left: 22px;
 }/*# sourceMappingURL=footer.css.map */
