@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const addToCartButtonHtml = isLoggedIn()
             ? `<button id="add__to__cart__btn">BUY</button>`
-            : `<p class="login-prompt">Please <a href="/account/login.html">log in</a> to purchase.</p>`;
+            : `<p class="login-prompt">Please <a href="./account/login.html">log in</a> to purchase.</p>`;
 
         productContainer.innerHTML = `
             <div class="product-image-container">
